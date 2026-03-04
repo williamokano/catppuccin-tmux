@@ -87,7 +87,10 @@ main() {
 
   # These variables are the defaults so that the setw and set calls are easier to parse.
   local show_directory
-  readonly show_directory="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red]"
+  readonly show_directory="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) #{?client_prefix,#[fg=$thm_red]"
+
+  local show_git_branch
+  readonly show_git_branch="#[fg=$thm_orange,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_orange] #[fg=$thm_fg,bg=$thm_gray] #(cd '#{pane_current_path}' && git branch --show-current 2>/dev/null) "
 
   local show_window
   readonly show_window="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red]"
@@ -96,11 +99,11 @@ main() {
   readonly show_session="#[fg=$thm_green]}#[bg=$thm_gray]$right_separator#{?client_prefix,#[bg=$thm_red],#[bg=$thm_green]}#[fg=$thm_bg] #[fg=$thm_fg,bg=$thm_gray] #S "
 
   local show_directory_in_window_status
-  #readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
+  #readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) "
   readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #W "
 
   local show_directory_in_window_status_current
-  #readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} "
+  #readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) "
   readonly show_directory_in_window_status_current="#[fg=colour232,bg=$thm_orange] #I #[fg=colour255,bg=colour237] #W "
 
   local show_window_in_window_status
@@ -120,8 +123,8 @@ main() {
   local show_date_time
   readonly show_date_time="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] $date_time "
 
-  # Right column 1 by default shows the current directory.
-  local right_column1=$show_directory
+  # Right column 1 by default shows the current directory and git branch.
+  local right_column1=$show_git_branch$show_directory
 
   # Right column 2 by default shows the current Session name.
   local right_column2=$show_session
