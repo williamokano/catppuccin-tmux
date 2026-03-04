@@ -90,7 +90,7 @@ main() {
   readonly show_directory="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #(echo '#{pane_current_path}' | rev | cut -d'/' -f-2 | rev) #{?client_prefix,#[fg=$thm_red]"
 
   local show_git_branch
-  readonly show_git_branch="#(cd '#{pane_current_path}' && branch=\$(git branch --show-current 2>/dev/null) && [ -n \"\$branch\" ] && echo \"#[fg=$thm_orange,bg=$thm_gray]${right_separator}#[fg=$thm_bg,bg=$thm_orange]  #[fg=$thm_fg,bg=$thm_gray] \$branch \")"
+  readonly show_git_branch="#[fg=$thm_orange,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_orange]  #[fg=$thm_fg,bg=$thm_gray] #(cd '#{pane_current_path}' && git branch --show-current 2>/dev/null) "
 
   local show_window
   readonly show_window="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red]"
