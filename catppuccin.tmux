@@ -46,8 +46,8 @@ main() {
   set status-right-length "100"
 
   # messages
-  set message-style "fg=${thm_cyan},bg=${thm_gray},align=centre"
-  set message-command-style "fg=${thm_cyan},bg=${thm_gray},align=centre"
+  set message-style "fg=${thm_cyan},bg=${thm_gray},align=left"
+  set message-command-style "fg=${thm_cyan},bg=${thm_gray},align=left"
 
   # panes
   set pane-border-style "fg=${thm_gray}"
